@@ -31,6 +31,8 @@ namespace AnimeInfo.Controllers
         {
             var AnimieData= _mapper.Map<Animes>(animieDto);
             _animieInterface.AddAnimie(AnimieData);
+
+
             return Ok();
         }
         [HttpPut]
