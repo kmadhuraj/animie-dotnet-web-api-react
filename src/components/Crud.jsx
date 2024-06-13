@@ -11,34 +11,21 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function Crud() {
-  //   const animeData = [
-  //     { id: 1, name: 'Naruto', description: 'Ninja anime', rating: 9.1 },
-  //     { id: 2, name: 'One Piece', description: 'Pirate anime', rating: 9.0 },
-  //     // Add more anime data as needed
-  // ];
-  // const [animeData, setAnimeData] = useState([]);                  
-  // useEffect(()=>{
-  //   axios.get('https://localhost:7193/api/Animie').then((response)=>{
-  //     setAnimeData(response.data);
-  //   }).catch((error)=>{
-  //     console.error('Error fetching data:',error);
-  //   });
-  // },[]);
 
   const [animeData, setAnimeData] = useState([]);
 
   const [show, setShow] = useState(false);
 
   // this is for the adding the New data 
-  const [animieName, setanimeName] = useState();
-  const [animieDesc, setanimeDesc] = useState();
+  const [animieName, setanimeName] = useState('');
+  const [animieDesc, setanimeDesc] = useState('');
   const [animieRating, setanimeRating] = useState();
 
   //this is for editig the existing data
-  const [editId, setEditId] = useState('');
+  const [editId, setEditId] = useState();
 
-  const [editAnimieName, setEditAnimieName] = useState();
-  const [editAnimieDesc, setEditAnimieDesc] = useState();
+  const [editAnimieName, setEditAnimieName] = useState('');
+  const [editAnimieDesc, setEditAnimieDesc] = useState('');
   const [editAnimieRating, setEditAnimieRating] = useState();
 
 
@@ -78,7 +65,8 @@ export default function Crud() {
     axios.get(`https://localhost:7193/api/Animie/${id}`)
     .then((result)=>{
       setEditAnimieName(result.data.animieName)
-      console.log(result.data.animieDesc)
+      // console.log(result.data.animieName)
+      
       setEditAnimieDesc(result.data.animieDesc)
       setEditAnimieRating(result.data.animieRating)
       setEditId(id)
@@ -87,6 +75,8 @@ export default function Crud() {
       console.log(error)
     })
   }
+
+ 
   const handleAddButton = (id) => {
     handleShow();
     
@@ -106,6 +96,21 @@ export default function Crud() {
   }
   
   const handleUpdate = () => {
+    const url=`https://localhost:7193/api/Animie/${editId}`;
+    const data= {
+      "id":editId,
+      "name": editAnimieName,
+      "description": editAnimieDesc,
+      "rating": editAnimieRating
+    }
+    axios.put(url,data)
+    .then((result)=>{
+      setEditAnimieName(result.data.editAnimieName)  
+      setEditAnimieDesc(result.data.editAnimieDesc)
+      setEditAnimieRating(result.data.editAnimieRating)
+    })
+    getData()
+    handleClose()
 
 
   }
