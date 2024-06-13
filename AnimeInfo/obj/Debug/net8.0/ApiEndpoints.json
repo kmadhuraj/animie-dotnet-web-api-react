@@ -37,19 +37,66 @@
   },
   {
     "ContainingType": "AnimeInfo.Controllers.AnimieController",
-    "Method": "UpdateAnimie",
+    "Method": "DeleteAnimie",
     "RelativePath": "api/Animie",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AnimeInfo.Controllers.AnimieController",
+    "Method": "UpdateAnimie",
+    "RelativePath": "api/Animie/{Id}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "animieDto",
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "updateAnimiedto",
         "Type": "AnimeInfo.DTOs.UpdateAnimieDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AnimeInfo.Controllers.AnimieController",
+    "Method": "GetAnimieById",
+    "RelativePath": "api/Animie/{Id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[AnimeInfo.DTOs.GetAnimieDto, AnimeInfo, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   },
   {
     "ContainingType": "AnimeInfo.Controllers.WeatherForecastController",

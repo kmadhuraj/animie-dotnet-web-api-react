@@ -2,6 +2,7 @@
 using AnimeInfo.Model;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Cryptography;
 
 namespace AnimeInfo.Services.AnimiesServices
 {
@@ -17,6 +18,7 @@ namespace AnimeInfo.Services.AnimiesServices
         {
             _context.Animes.Add(anime);
             _context.SaveChanges();
+            
         }
 
         public List<Animes> GetAnimies()
@@ -29,16 +31,30 @@ namespace AnimeInfo.Services.AnimiesServices
             throw new NotImplementedException();
         }
 
-        public bool UpdateAnimie(Animes anime)
+        public void UpdateAnimie(Animes anime)
         {
-            if(anime == null)
-            {
-                return false;
-               // return b NotFound("no data found");
-            }
+            if (anime == null) throw new ArgumentNullException();
             _context.Animes.Update(anime);
             _context.SaveChanges();
-            return true;
+        }
+        public int DeleteAnimie(int id)
+        {
+            var animie=_context.Animes.Find(id);
+            if (animie != null)
+            {
+                _context.Animes.Remove(animie);
+                _context.SaveChanges();
+                return 1;
+            }
+            else
+            {
+                return 0;
+            }
+            
+        }
+        public Animes GetAnimiesById(int id)
+        {
+            return _context.Animes.FirstOrDefault(a=>a.Id==id);
         }
     }
 }

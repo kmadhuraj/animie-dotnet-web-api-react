@@ -10,7 +10,7 @@ namespace AnimeInfo.Profile
             CreateMap<AddAnimieDto,Animes>();
             CreateMap<Animes,GetAnimieDto>();
             CreateMap<UpdateAnimieDto,Animes>();
-
+            CreateMap<Animes, DeleteAnimie>();
         }
     }
 }

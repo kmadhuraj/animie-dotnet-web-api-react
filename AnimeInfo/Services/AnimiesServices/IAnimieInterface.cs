@@ -1,4 +1,5 @@
-﻿using AnimeInfo.Model;
+﻿using AnimeInfo.DTOs;
+using AnimeInfo.Model;
 
 namespace AnimeInfo.Services.AnimiesServices
 {
@@ -6,7 +7,11 @@ namespace AnimeInfo.Services.AnimiesServices
     {
         void AddAnimie(Animes anime);
         void RemoveAnimie(Animes anime);
-        bool UpdateAnimie(Animes anime);
+        void UpdateAnimie(Animes anime);
+        int DeleteAnimie(int id);
         List<Animes> GetAnimies();
+        Animes GetAnimiesById(int id);
+  
+        //void UpdateAnimie(Animes updatedData);
     }
 }

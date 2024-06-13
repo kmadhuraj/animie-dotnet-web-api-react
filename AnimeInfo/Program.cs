@@ -19,6 +19,15 @@ builder.Services.AddDbContext<AnimieDbContext>(options =>
 builder.Services.AddAutoMapper(typeof(AnimieDetailService));
 var app = builder.Build();
 
+builder.Services.AddCors();
+app.UseCors(builder =>
+{
+    builder.AllowAnyOrigin()
+    .AllowAnyMethod()
+    .AllowAnyHeader();
+
+});
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
