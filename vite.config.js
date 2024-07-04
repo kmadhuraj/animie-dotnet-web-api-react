@@ -5,12 +5,7 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   server: {
-    proxy: {
-      '/api/Animie':{
-        target: 'https://localhost:7193',
-        secure: false,
-        changeOrigin: true,
-      }
-    } 
+    host:true,
+    
   }
 })

@@ -1,0 +1,42 @@
+[33mcommit 38d72ff3ecee6e65df720223948ac40c152caba8[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: madhuraj <madhurajmadu693@gmail.com>
+Date:   Fri Jun 14 12:56:35 2024 +0530
+
+    layout design is modified
+
+[33mcommit 56011c4edb0481ff547b85d82431ebfb0a3c9345[m
+Author: madhuraj <madhurajmadu693@gmail.com>
+Date:   Thu Jun 13 11:58:30 2024 +0530
+
+    crud operation are working finely
+
+[33mcommit 483d9a618dc9e742f0b00d6a57d9a8b0f20ef052[m
+Author: madhuraj <madhurajmadu693@gmail.com>
+Date:   Thu Jun 13 10:12:47 2024 +0530
+
+    updated the crud.jsx and readme file
+
+[33mcommit a87e5bb7e6e69a02c2cf1d623e576713ac94306e[m
+Merge: 918e118 af2932e
+Author: madhuraj <madhurajmadu693@gmail.com>
+Date:   Thu Jun 13 10:00:46 2024 +0530
+
+    updated the readme file
+
+[33mcommit 918e118824d9e6364c035d4d260d1aea4b2c5468[m
+Author: madhuraj <madhurajmadu693@gmail.com>
+Date:   Wed Jun 12 13:04:14 2024 +0530
+
+    modified the crud.jsx file added the function to fetch the data from the API
+
+[33mcommit af2932e9ee24daeb12bc9ac811806a1328de4e5d[m
+Author: Madhuraj K <107345732+kmadhuraj@users.noreply.github.com>
+Date:   Fri Jun 7 15:59:58 2024 +0530
+
+    Update README.md
+
+[33mcommit dfab3c682eb7a9fd4a498310cc53c276a1e2b362[m
+Author: madhuraj <madhurajmadu693@gmail.com>
+Date:   Fri Jun 7 15:33:48 2024 +0530
+
+    initial commit

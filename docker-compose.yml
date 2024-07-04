@@ -1,0 +1,43 @@
+version: '3.4'
+networks:
+  animewebapi-react:
+services:
+
+#sql server
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: Sql_server_2022
+    ports:
+      - 8002:1433
+    environment:
+
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=password@9090
+    networks:
+      - animewebapi-react
+
+#web api
+  asp-webapi: 
+    image: anime-web-api
+    container_name: Anime_Web_Api
+    ports:
+      - 7001:80
+      - 7002:443
+    environment:
+      - DB_NAME=AnimieDb
+      - DB_SA_PASSWORD=password@9090
+    networks:
+      - animewebapi-react
+    depends_on:
+      - sqlserver
+
+    # react app   
+  react-app:
+    image: react-latest-app-animie
+    ports:
+      - 5172:5173
+    environment:
+      - VITE_APP_API_URL=${VITE_APP_API_URL}
+    networks:
+      - animewebapi-react
+ 

@@ -1,171 +1,189 @@
-import React, { Fragment, useEffect, useState } from 'react'
-
-import axios from 'axios'
-import Table from 'react-bootstrap/Table'
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Container from 'react-bootstrap/Container';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
-export default function Crud() {
-
-  const [animeData, setAnimeData] = useState([]);
+import React, { Fragment, useEffect, useState } from "react";
+import axios from "axios";
+import Table from "react-bootstrap/Table";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Container from "react-bootstrap/Container";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import BackButton from "./BackButton";
+export default function Crud({ getAnimeData, getDatafun }) {
+  // const [animeData, setAnimeData] = useState([]);
   const [show, setShow] = useState(false);
 
-  // this is for the adding the New data 
-  const [animieName, setanimeName] = useState('');
-  const [animieDesc, setanimeDesc] = useState('');
+  // this is for the adding the New data
+  const [animieName, setanimeName] = useState("");
+  const [animieDesc, setanimeDesc] = useState("");
   const [animieRating, setanimeRating] = useState(0);
-
   //this is for editig the existing data
   const [editId, setEditId] = useState(0);
+  const [editAnimieName, setEditAnimieName] = useState("");
+  const [editAnimieDesc, setEditAnimieDesc] = useState("");
+  const [editAnimieRating, setEditAnimieRating] = useState(0);
+  // Appi url
+  const apiUrl = import.meta.env.VITE_APP_API_URL;
 
-  const [editAnimieName, setEditAnimieName] = useState('');
-  const [editAnimieDesc, setEditAnimieDesc] = useState('');
-  const [editAnimieRating, setEditAnimieRating] = useState();
-
-
+  // for showing the  model pop up window
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  //for getting data from the get operation
-  const getData = () => {
-    axios.get('/api/Animie')
-      .then((response) => {
-        setAnimeData(response.data);
-      })
-      .catch((error) => {
-        console.error('Error fetching data:', error);
-      });
-  }
-  useEffect(() => {
-    // Fetch data from the API
-    getData()
-  }, []);
 
-  const tableRows = animeData.map((anime) => (
+  // for displaying the get data in the page
+  const tableRows = getAnimeData.map((anime) => (
     <tr key={anime.id}>
       <td>{anime.id}</td>
       <td>{anime.name}</td>
       <td>{anime.description}</td>
       <td>{anime.rating}</td>
-      <div className=' mx-2 d-flex bg-info'>
-        <button onClick={() => handleEditButton(anime.id)} className=' btn btn-primary border px-4 mx-2'>Edit</button>
-        <button onClick={() => handleDelete(anime.id)} className='btn btn-danger border px-3'>Delete</button>
+      <div className=" mx-2 d-flex bg-dark flex-column ">
+        <button
+          onClick={() => handleEditButton(anime.id)}
+          className="btn btn-primary border"
+        >
+          Edit
+        </button>
+        <button
+          onClick={() => handleDelete(anime.id)}
+          className="btn btn-danger border"
+        >
+          Delete
+        </button>
       </div>
     </tr>
-
   ));
 
   const handleEditButton = (id) => {
-
-    axios.get(`https://localhost:7193/api/Animie/${id}`)
+    axios
+      .get(apiUrl, id)
       .then((result) => {
-        setEditAnimieName(result.data.name)
-        console.log(result)
-
-        setEditAnimieDesc(result.data.description)
-        setEditAnimieRating(result.data.rating)
-        setEditId(id)
-
-        handleShow();
+        if (result.data.length === 1) {
+          setEditAnimieName(result.data.at(0).name);
+          setEditAnimieDesc(result.data.at(0).description);
+          setEditAnimieRating(result.data.at(0).rating);
+          setEditId(id);
+          handleShow();
+        } else {
+          toast.error("undefined data");
+        }
       })
       .catch((error) => {
-        console.log(error)
-      })
-  }
+        toast.error(error);
+        console.log(error);
+      });
+  };
 
-  const handleAddButton = (id) => {
-    handleShow();
-
-  }
   const handleDelete = (id) => {
-    axios.delete(`https://localhost:7193/api/Animie?id=${id}`)
+    axios
+      .delete(`${apiUrl}?id=${id}`)
       .then((result) => {
         if (result.status == 200) {
-          toast.success('employee has deleted successfully');
-          getData();
+          toast.success("employee has deleted successfully");
+          // getData operation perfomed
+          getDatafun();
         }
-      }).catch((error) => {
+      })
+      .catch((error) => {
         toast.error(error);
-      })
-  }
+      });
+  };
 
-  const handleUpdate = () => {
-    const url = 'https://localhost:7193/api/Animie';
-    const data = {
-      "id": editId,
-      "name": editAnimieName,
-      "description": editAnimieDesc,
-      "rating": editAnimieRating
-    }
-    axios.put(url, data)
-      .then((result) => {
-        setEditId(result.data.id)
-        setEditAnimieName(result.data.editAnimieName)
-        setEditAnimieDesc(result.data.editAnimieDesc)
-        setEditAnimieRating(result.data.editAnimieRating)
-      })
-    getData()
-    handleClose()
-
-
-  }
-  //to save the data from the api 
+  //to save the data from the api
   const handleSave = () => {
-    const url = 'https://localhost:7193/api/Animie'
+    const url = apiUrl;
     const data = {
-      "name": animieName,
-      "description": animieDesc,
-      "rating": animieRating
-    }
-    axios.post(url, data)
-      .then((result) => {
-        //used for getting data from the get operation
-        getData();//for getting the updated data from the get operation 
-        Clear();
-        toast.success('New Animie has been added successfully');
-      })
-  }
+      name: animieName,
+      description: animieDesc,
+      rating: animieRating,
+    };
+    axios.post(url, data).then(() => {
+      //used for getting data from the get operation
+      getDatafun(); //for getting the updated data from the get operation
+      Clear();
+      toast.success("New Animie has been added successfully");
+    });
+  };
+
+  // to perform update operation
+  const handleUpdate = () => {
+    const url = apiUrl;
+    const data = {
+      id: editId,
+      name: editAnimieName,
+      description: editAnimieDesc,
+      rating: editAnimieRating,
+    };
+    axios.put(url, data).then((result) => {
+      setEditId(result.data.id);
+      console.log(result.data.name);
+      setEditAnimieName(result.data.name);
+      setEditAnimieDesc(result.data.description);
+      setEditAnimieRating(result.data.rating);
+    });
+    getDatafun();
+    handleClose();
+  };
+
   //to clear the data
   const Clear = () => {
-    setanimeName('');
-    setanimeDesc('');
-    setanimeRating('');
-  }
+    setanimeName("");
+    setanimeDesc("");
+    setanimeRating("");
+  };
+
   return (
     <>
-      <div className='d-flex flex-column  bg-info '>
-        <h2 className='text-center'>Animax</h2>
+      <div className="d-flex flex-column bg-dark ">
+        <h2 className="text-center">Animax</h2>
+        <BackButton />
         <Fragment>
           <ToastContainer />
-          <Container className='mt-5'>
+          <Container className="mt-5">
             <Row>
-              <Col><input type="text" className='form-control' placeholder='Enter the Animie' value={animieName} onChange={(e) => setanimeName(e.target.value)} /></Col>
-              <Col><input type="text" className='form-control' placeholder='Enter the Description' value={animieDesc} onChange={(e) => setanimeDesc(e.target.value)} /></Col>
-              <Col><input type="number" className='form-control' placeholder='Enter the Rating ' value={animieRating} onChange={(e) => setanimeRating(e.target.value)} /></Col>
+              <Col>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Enter the Animie"
+                  value={animieName}
+                  onChange={(e) => setanimeName(e.target.value)}
+                />
+              </Col>
+              <Col>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Enter the Description"
+                  value={animieDesc}
+                  onChange={(e) => setanimeDesc(e.target.value)}
+                />
+              </Col>
+              <Col>
+                <input
+                  type="number"
+                  className="form-control"
+                  placeholder="Enter the Rating "
+                  value={animieRating}
+                  onChange={(e) => setanimeRating(e.target.value)}
+                />
+              </Col>
             </Row>
-            <button className='btn btn-primary mt-2' onClick={handleSave}>Add</button>
+            <button className="btn btn-warning mt-2" onClick={handleSave}>
+              Add
+            </button>
 
-
-            <Table striped className='mt-5'>
-              <thead >
-                <tr style={{ width: '120px' }}>
+            <Table striped className="mt-5">
+              <thead>
+                <tr style={{ width: "120px" }}>
                   <th>Id</th>
                   <th>Animie</th>
                   <th>Description</th>
                   <th>Rating</th>
                 </tr>
               </thead>
-              <tbody>
-                {tableRows}
-              </tbody>
-
+              <tbody>{tableRows}</tbody>
             </Table>
           </Container>
-
 
           {/* model popup */}
           <Modal show={show} onHide={handleClose}>
@@ -174,11 +192,34 @@ export default function Crud() {
             </Modal.Header>
             <Modal.Body>
               <Row>
-                <Col><input type="text" className='form-control' placeholder='Name' value={editAnimieName} onChange={(e) => setEditAnimieName(e.target.value)} /></Col>
-                <Col><input type="text" className='form-control' placeholder='Description' value={editAnimieDesc} onChange={(e) => setEditAnimieDesc(e.target.value)} /></Col>
-                <Col><input type="number" className='form-control' placeholder='Rating' value={editAnimieRating} onChange={(e) => setEditAnimieRating(e.target.value)} /></Col>
+                <Col>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Name"
+                    value={editAnimieName}
+                    onChange={(e) => setEditAnimieName(e.target.value)}
+                  />
+                </Col>
+                <Col>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Description"
+                    value={editAnimieDesc}
+                    onChange={(e) => setEditAnimieDesc(e.target.value)}
+                  />
+                </Col>
+                <Col>
+                  <input
+                    type="number"
+                    className="form-control"
+                    placeholder="Rating"
+                    value={editAnimieRating}
+                    onChange={(e) => setEditAnimieRating(e.target.value)}
+                  />
+                </Col>
               </Row>
-
             </Modal.Body>
             <Modal.Footer>
               <Button variant="secondary" onClick={handleClose}>
@@ -192,5 +233,5 @@ export default function Crud() {
         </Fragment>
       </div>
     </>
-  )
+  );
 }

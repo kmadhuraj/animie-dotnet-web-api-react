@@ -1,0 +1,39 @@
+/* 
+@media(min-width:425px){
+
+}
+
+@media (min-width:600px){
+    
+    .view-details{
+        margin: 0;
+    }
+}
+
+@media (min-width:768px){
+    
+    .view-details{
+        display: flex;
+        flex-direction: column;
+        margin:0 0;
+    
+    }
+    .home-img{
+        width: 100px;
+        height: auto;
+    }
+}
+
+@media(min-width:992px){
+    .home-img{
+        width: 500px;
+        height: 300px;
+    }
+    .home-page-container{
+        display: flex;
+        flex-direction: column;
+    }
+}
+@media(min-width:1024px){
+    
+} */
