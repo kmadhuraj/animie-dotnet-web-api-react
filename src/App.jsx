@@ -3,6 +3,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomePage from "./components/HomePage.jsx";
 import Crud from "./components/Crud.jsx";
 import ViewAnimes from "./components/ViewAnimes.jsx";
+import UserRegistration from "./components/Authentication/UserRegistration.jsx";
+import Login from "./components/Authentication/Login.jsx";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "./App.css";
@@ -39,6 +41,15 @@ function App() {
       path: "/view-animie",
       element: <ViewAnimes getAnimeData={animeData} />,
     },
+    {
+      path:"sign-up",
+      element:<UserRegistration/>
+
+    },
+    {
+      path:'sign-in',
+      element:<Login/>
+    }
   ]);
 
   return (
