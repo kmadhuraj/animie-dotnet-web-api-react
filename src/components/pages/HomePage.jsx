@@ -1,5 +1,5 @@
 import React, { Component, useEffect, useState } from "react";
-import Navbar from "./Navbar";
+import Navbar from "../header/Navbar";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -8,11 +8,13 @@ import {
   faTwitter,
 } from "@fortawesome/free-brands-svg-icons";
 import { Link, useNavigate } from "react-router-dom";
-import logo from "../assets/donatello.png";
-import animieImg from '../assets/anime-traveling.jpg'
-import '../App.css';
+import logo from "../../assets/donatello.png";
+import animieImg from '../../assets/anime-traveling.jpg'
+import '../../App.css';
+import { useLocation } from "react-router-dom";
 export default function HomePage() {
   const [AnimieImg, setAnimeImg] = useState("");
+  const location=useLocation();
   const navigate = useNavigate();
 
   const Style = {
@@ -47,7 +49,8 @@ export default function HomePage() {
   };
   return (
     <>
-      <Navbar />
+      <Navbar  />
+      
       <div style={Style.ContainerStyle} className="d-flex flex-column-reverse flex-md-row">
         <div className="home-page-container container my-5 mx-md-5">
           <img style={Style.logoStyle} className="" src={logo} alt="logo" />
@@ -101,3 +104,4 @@ export default function HomePage() {
     </>
   );
 }
+

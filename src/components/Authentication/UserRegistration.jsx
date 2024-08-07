@@ -183,7 +183,7 @@ const Forms = () => {
 
               <p className="text-center m-0">
                 Already have an account?{" "}
-                <CDBLink className="d-inline p-0" to="#">
+                <CDBLink className="d-inline p-0" to="/sign-in">
                   Sign In
                 </CDBLink>
               </p>

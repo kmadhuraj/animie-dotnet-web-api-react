@@ -8,7 +8,7 @@ import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import BackButton from "./BackButton";
+import BackButton from "../../components/common/BackButton";
 export default function Crud({ getAnimeData, getDatafun }) {
   // const [animeData, setAnimeData] = useState([]);
   const [show, setShow] = useState(false);

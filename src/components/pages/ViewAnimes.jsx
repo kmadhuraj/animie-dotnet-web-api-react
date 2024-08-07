@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import Navbar from "./Navbar";
-import AnimePage from "./AnimePage";
+import Navbar from "../header/Navbar";
+import AnimePage from "../pages/AnimePage";
 import Pagination from "./Pagination";
-import dummyimg from "../assets/fantacy.jpg";
+import dummyimg from "../../assets/fantacy.jpg";
 
 function ViewAnimes({ getAnimeData }) {
   //   const [animePage, setAnimePage] = useState([]);
