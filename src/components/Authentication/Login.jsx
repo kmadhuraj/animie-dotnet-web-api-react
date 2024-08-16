@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useId, useState } from "react";
 import axios from "axios";
 import {
   CDBInput,
@@ -13,6 +13,7 @@ import { ToastContainer, toast } from "react-toastify";
 import logo from "./../../assets/donatello.png";
 import { useNavigate } from "react-router-dom";
 import useSignIn from "react-auth-kit/hooks/useSignIn";
+import refresh from "./refresh";
 const Forms = () => {
   const loginUrl = import.meta.env.VITE_APP_LOGIN_URL;
   const [loginData, setLoginData] = useState({
@@ -22,37 +23,48 @@ const Forms = () => {
   const navigate = useNavigate();
 
   //sign in using react auth kit
+  const signIn = useSignIn();
 
   const handleUserValue = (e) => {
     const { value, name } = e.target;
     setLoginData({ ...loginData, [name]: value });
   };
-
-  const signIn = useSignIn();
-  // console.log(loginData);
+  
   const login = () => {
     axios
       .post(loginUrl, loginData)
       .then((response) => {
-        toast.success("User login success");
-        console.log(response.data);
+        
+        const usertoken = response.data.tokenObject;
+        console.log(usertoken);
         signIn({
-          auth: {
-            // token:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc…xLyJ9.LfUfCf5GjN016ThjFvYnLD-7AKbJGoFiVrhSzgXS_4E",
-            token: response.data,
+          auth: { 
+            token: usertoken,
             type: "Bearer",
+            expiresAt:3200
           },
           userState: {
             name: loginData.email,
+            
           },
+          // refresh:refresh
         });
-        // console.log(SignIn.auth.token)
-        // navigate("/", { state: { name: loginData.email } });
+        toast.success("User login success");
+        navigate("/");
+        // if(signIn()){
+
+        // }
+        // else{
+        //   console.log("cant login")
+        // }
       })
-      .catch(() => {
-        toast.error("login failed");
+      .catch((error) => {
+        toast.error(error);
       });
+    
+    
   };
+  
 
   return (
     <div

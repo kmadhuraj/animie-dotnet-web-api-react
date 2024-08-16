@@ -23,6 +23,7 @@ const Forms = () => {
     salt: "string",
     isAdmin: false,
   });
+  
   const initialFormState = {
     username: "",
     email: "",

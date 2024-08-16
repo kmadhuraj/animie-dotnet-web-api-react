@@ -13,6 +13,7 @@ import animieImg from '../../assets/anime-traveling.jpg'
 import '../../App.css';
 import { useLocation } from "react-router-dom";
 export default function HomePage() {
+
   const [AnimieImg, setAnimeImg] = useState("");
   const location=useLocation();
   const navigate = useNavigate();
@@ -28,21 +29,20 @@ export default function HomePage() {
     },
   };
 
-  useEffect(() => {
-    const AnimeUrl = import.meta.env.VITE_APP_ANIMIE_IMG_URL;
+  // useEffect(() => {
+  //   const AnimeUrl = import.meta.env.VITE_APP_ANIMIE_IMG_URL;
 
-    axios
-      .get(AnimeUrl)
-      .then((response) => {
-        setAnimeImg(response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching anime image:", error);
-        setAnimeImg(animieImg
-          
-        );
-      });
-  }, []);
+  //   axios
+  //     .get(AnimeUrl)
+  //     .then((response) => {
+  //       setAnimeImg(response.data);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error fetching anime image:", error);
+  //       setAnimeImg(animieImg
+  //       );
+  //     });
+  // }, []);
 
   const handleNavigateSeeDatials = () => {
     navigate("/view-animie");
@@ -72,6 +72,8 @@ export default function HomePage() {
           >
             See Details
           </button>
+
+          
           <div className="d-flex my-5">
             <ul className="list-unstyled d-flex gap-4">
               <h6>Follow us on </h6>
@@ -96,7 +98,7 @@ export default function HomePage() {
         <div className="container">
           <img
             className="home-img my-5  w-100" 
-            src={AnimieImg}
+            src={animieImg}
             alt="random image"
           />
         </div>

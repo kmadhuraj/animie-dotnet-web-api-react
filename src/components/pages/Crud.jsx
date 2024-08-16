@@ -9,9 +9,11 @@ import Container from "react-bootstrap/Container";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import BackButton from "../../components/common/BackButton";
-export default function Crud({ getAnimeData, getDatafun }) {
-  // const [animeData, setAnimeData] = useState([]);
+import useAuthHeader from "react-auth-kit/hooks/useAuthHeader";
+export default function Crud({ getDatafun }) {
   const [show, setShow] = useState(false);
+  //for getting the data
+  const [animeData, setAnimeData] = useState([]);
 
   // this is for the adding the New data
   const [animieName, setanimeName] = useState("");
@@ -24,13 +26,33 @@ export default function Crud({ getAnimeData, getDatafun }) {
   const [editAnimieRating, setEditAnimieRating] = useState(0);
   // Appi url
   const apiUrl = import.meta.env.VITE_APP_API_URL;
+  //for authentication token 
+  const authHeader = useAuthHeader();
+  const headers={'Authorization':authHeader}
 
   // for showing the  model pop up window
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+//to get the data 
+  const getData = () => {
+    axios
+      .get(apiUrl,{headers})
+      .then((response) => {
+        setAnimeData(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  };
+  useEffect(() => {
+    // Fetch data from the API
+    getData();
+  }, []);
+
+  
   // for displaying the get data in the page
-  const tableRows = getAnimeData.map((anime) => (
+  const tableRows = animeData.map((anime) => (
     <tr key={anime.id}>
       <td>{anime.id}</td>
       <td>{anime.name}</td>
@@ -52,6 +74,7 @@ export default function Crud({ getAnimeData, getDatafun }) {
       </div>
     </tr>
   ));
+
 
   const handleEditButton = (id) => {
     axios

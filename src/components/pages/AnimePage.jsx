@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 // import dummyimg from "../assets/fantacy.jpg";
 // import axios from "axios";
-function AnimePage({ getAnimieToPage }) {
+function AnimePage({ animeData }) {
   // const randomImgUrl = import.meta.env.VITE_APP_RANDOM_IMG;
   // const [randomImg, setRandomImg] = useState();
 
@@ -16,7 +16,7 @@ function AnimePage({ getAnimieToPage }) {
   //       setAnimeImg({dummyimg});
   //     });
   // }, []);
-  const viewAnimedata = getAnimieToPage.map((animie) => (
+  const viewAnimedata = animeData.map((animie) => (
     <div key={animie.id}>
       <h1> {animie.name} </h1>
       <p>{animie.description}</p>
