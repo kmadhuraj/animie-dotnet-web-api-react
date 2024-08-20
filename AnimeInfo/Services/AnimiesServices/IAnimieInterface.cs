@@ -1,5 +1,6 @@
 ﻿using AnimeInfo.DTOs;
 using AnimeInfo.Model;
+using Microsoft.AspNetCore.Identity;
 
 namespace AnimeInfo.Services.AnimiesServices
 {
@@ -11,7 +12,16 @@ namespace AnimeInfo.Services.AnimiesServices
         int DeleteAnimie(int id);
         List<Animes> GetAnimies();
         Animes GetAnimiesById(int id);
-  
-        //void UpdateAnimie(Animes updatedData);
+
+        string GenerateToken(UserCredentials UserCredent);
+        //AdminLogin AuthenticateAdmin(AdminLogin admin);
+        string RegisterUser(UserCredentials ulogin);
+        string HashingPassword(string password, out byte[] salt);
+        UserCredentials Authenticate(string EnteredEmail, string EnteredPassword);
+        bool VerifyPassword(string EnteredPassword, string hashedPassword, byte[] salt);
+        //Task<IdentityResult> CreateUserAsync(string Email, string password, bool isAdmin);
+
+        //public string UserRoleManager(UserCredentials userRole);
+        //void UpdateAnimie(Animes updatedData); 
     }
 }

@@ -37,6 +37,22 @@
   },
   {
     "ContainingType": "AnimeInfo.Controllers.AnimieController",
+    "Method": "UpdateAnimie",
+    "RelativePath": "api/Animie",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "updateAnimiedto",
+        "Type": "AnimeInfo.DTOs.UpdateAnimieDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AnimeInfo.Controllers.AnimieController",
     "Method": "DeleteAnimie",
     "RelativePath": "api/Animie",
     "HttpMethod": "DELETE",
@@ -47,27 +63,6 @@
         "Name": "id",
         "Type": "System.Int32",
         "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "AnimeInfo.Controllers.AnimieController",
-    "Method": "UpdateAnimie",
-    "RelativePath": "api/Animie/{Id}",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "Id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      },
-      {
-        "Name": "updateAnimiedto",
-        "Type": "AnimeInfo.DTOs.UpdateAnimieDto",
-        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -99,23 +94,35 @@
     ]
   },
   {
-    "ContainingType": "AnimeInfo.Controllers.WeatherForecastController",
-    "Method": "Get",
-    "RelativePath": "WeatherForecast",
-    "HttpMethod": "GET",
+    "ContainingType": "AnimeInfo.Controllers.UserController",
+    "Method": "LoginUser",
+    "RelativePath": "api/User/Login",
+    "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": [
+    "Parameters": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[AnimeInfo.WeatherForecast, AnimeInfo, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
+        "Name": "userDto",
+        "Type": "AnimeInfo.DTOs.UserLoginDto",
+        "IsRequired": true
       }
-    ]
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AnimeInfo.Controllers.UserController",
+    "Method": "UserRegistration",
+    "RelativePath": "api/User/UserRegistration",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userCred",
+        "Type": "AnimeInfo.DTOs.UserCredentialDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   }
 ]

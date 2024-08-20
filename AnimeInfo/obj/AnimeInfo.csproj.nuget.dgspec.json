@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\madhurajk\\source\\repos\\AnimeInfo\\AnimeInfo\\AnimeInfo.csproj": {}
+    "D:\\AnimeInfo\\AnimeInfo\\AnimeInfo.csproj": {}
   },
   "projects": {
-    "C:\\Users\\madhurajk\\source\\repos\\AnimeInfo\\AnimeInfo\\AnimeInfo.csproj": {
+    "D:\\AnimeInfo\\AnimeInfo\\AnimeInfo.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\madhurajk\\source\\repos\\AnimeInfo\\AnimeInfo\\AnimeInfo.csproj",
+        "projectUniqueName": "D:\\AnimeInfo\\AnimeInfo\\AnimeInfo.csproj",
         "projectName": "AnimeInfo",
-        "projectPath": "C:\\Users\\madhurajk\\source\\repos\\AnimeInfo\\AnimeInfo\\AnimeInfo.csproj",
+        "projectPath": "D:\\AnimeInfo\\AnimeInfo\\AnimeInfo.csproj",
         "packagesPath": "C:\\Users\\madhurajk\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\madhurajk\\source\\repos\\AnimeInfo\\AnimeInfo\\obj\\",
+        "outputPath": "D:\\AnimeInfo\\AnimeInfo\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\madhurajk\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -49,6 +49,18 @@
               "target": "Package",
               "version": "[13.0.1, )"
             },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[8.0.6, )"
+            },
+            "Microsoft.AspNetCore.Identity": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.5, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[8.0.5, )"
@@ -62,6 +74,16 @@
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[8.0.5, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.5, )"
+            },
+            "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": {
+              "target": "Package",
+              "version": "[1.19.6, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",

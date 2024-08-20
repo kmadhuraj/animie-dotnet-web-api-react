@@ -2,6 +2,7 @@
 using AnimeInfo.Model;
 using AnimeInfo.Services.AnimiesServices;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -20,6 +21,8 @@ namespace AnimeInfo.Controllers
             _mapper = mapper;
         }
 
+        //[Authorize(Roles = "User")]
+        [Authorize(Roles ="User,Admin")]
         [HttpGet]
         public ActionResult<IEnumerable<GetAnimieDto>>GetAnimies()
         {
@@ -27,34 +30,34 @@ namespace AnimeInfo.Controllers
             IEnumerable<GetAnimieDto> animieDto = _mapper.Map<IEnumerable<GetAnimieDto>>(animieList);
             return Ok(animieDto);
         }
+        [Authorize(Roles ="Admin")]
         [HttpPost]
         public IActionResult AddAnimie(AddAnimieDto animieDto)
         {
             var AnimieData= _mapper.Map<Animes>(animieDto);
             _animieInterface.AddAnimie(AnimieData);
             return Ok();
-        }
 
-        [HttpPut("{Id}")]
-        public IActionResult UpdateAnimie(int Id,UpdateAnimieDto updateAnimiedto)
+        }
+        [Authorize(Roles = "Admin")]
+        [HttpPut]
+        public IActionResult UpdateAnimie(UpdateAnimieDto updateAnimiedto)
         {
-            if (Id != updateAnimiedto.Id)
-            {
-                return BadRequest();
-            }
+           
             var UpdateData = _mapper.Map<Animes>(updateAnimiedto);
             _animieInterface.UpdateAnimie(UpdateData);
             return Ok();
         }
+        [Authorize(Roles = "Admin")]
         [HttpDelete]
         public IActionResult DeleteAnimie(int id)
         {
-            
             
             var status = _animieInterface.DeleteAnimie(id);
             if(status == 0) { return NotFound(); }
             return Ok("entry deleted successfully");
         }
+        [Authorize(Roles = "Admin")]
         [HttpGet("{Id}")]
         public ActionResult<IEnumerable<GetAnimieDto>> GetAnimieById(int Id)
         {
@@ -64,8 +67,6 @@ namespace AnimeInfo.Controllers
                 return Ok(_mapper.Map<GetAnimieDto>(AnimeId));
             }
             return NotFound();
-
-
 
         }
 
