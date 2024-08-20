@@ -29,42 +29,32 @@ const Forms = () => {
     const { value, name } = e.target;
     setLoginData({ ...loginData, [name]: value });
   };
-  
-  const login = () => {
-    axios
-      .post(loginUrl, loginData)
-      .then((response) => {
-        
-        const usertoken = response.data.tokenObject;
-        console.log(usertoken);
-        signIn({
-          auth: { 
-            token: usertoken,
-            type: "Bearer",
-            expiresAt:3200
-          },
-          userState: {
-            name: loginData.email,
-            
-          },
-          // refresh:refresh
-        });
-        toast.success("User login success");
-        navigate("/");
-        // if(signIn()){
 
-        // }
-        // else{
-        //   console.log("cant login")
-        // }
-      })
-      .catch((error) => {
-        toast.error(error);
-      });
-    
-    
+  const login = () => {
+      axios
+        .post(loginUrl, loginData)
+        .then((response) => {
+          const usertoken = response.data.tokenObject;
+          console.log(usertoken);
+          signIn({
+            auth: {
+              token: usertoken,
+              type: "Bearer",
+              expiresAt: 3200,
+            },
+            userState: {
+              name: loginData.email,
+            },
+            // refresh:refresh
+          });
+          toast.success("User login success");
+          navigate("/");
+        })
+        .catch((error) => {
+          toast.error(error);
+        });
+      
   };
-  
 
   return (
     <div
